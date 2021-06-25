@@ -1,0 +1,46 @@
+<mvc:View controllerName="com.mindset.wm.bayperformance.controller.App" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core">
+<App id="app">
+		<pages>
+			<Page title="Bay Performance">
+				<customHeader>
+					<Toolbar design="Transparent">
+						<Button icon="sap-icon://home" press="onHome"></Button>
+						<ToolbarSpacer></ToolbarSpacer>
+						<Title text="Bay Performance" textAlign="Center"></Title>
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button icon="sap-icon://customer"/>
+					</Toolbar>
+				</customHeader>
+				<Toolbar>
+					<SearchField width="100%" liveChange="onSearch"/>
+				</Toolbar>
+				<Toolbar>
+					<Label text="Articles" design="Bold"></Label>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://sort" press="onPress">
+						<customData>
+							<core:CustomData key="pavani" value="sort"/>
+						</customData>
+					</Button>
+				</Toolbar>
+				<content>
+					<!--<List id="list" items="{ManageCustomers>/CustomerDetails}">-->
+					<!--	<items>-->
+					<!--		<ObjectListItem type="Active" title="{ManageCustomers>Name}" numberUnit="{ManageCustomers>LastOrderId}"-->
+					<!--			number="{ManageCustomers>ytdOrderVlaue}">-->
+					<!--			<attributes>-->
+					<!--				<ObjectAttribute title="{i18n>lastOrderDate}" text="{ManageCustomers>LastOrderDate}"/>-->
+					<!--				<ObjectAttribute title="{i18n>customerPhone}" text="{ManageCustomers>CustomerPhone}"/>-->
+					<!--				<ObjectAttribute title="{i18n>customerAddress}" text="{ManageCustomers>CustomerAddress}"/>-->
+					<!--				<ObjectAttribute title="{i18n>pincode}" text="{ManageCustomers>Pincode}"/>-->
+					<!--			</attributes>-->
+					<!--		</ObjectListItem>-->
+					<!--	</items>-->
+					<!--</List>-->
+					
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
