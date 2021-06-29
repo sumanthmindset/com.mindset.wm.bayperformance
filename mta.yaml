@@ -1,0 +1,80 @@
+ID: bayperformance
+_schema-version: 3.2.0
+version: 0.0.1
+parameters:
+  enable-parallel-deployments: true
+modules:
+  - name: webapp_deployer
+    type: com.sap.application.content
+    path: deployer
+    requires:
+      - name: bayperformance_html5_repo_host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - name: uimodule
+          artifacts:
+            - dist/uimodule.zip
+          target-path: resources/
+  - name: bayperformancedestination-content
+    type: com.sap.application.content
+    build-parameters:
+      no-source: true
+    requires:
+      - name: bayperformance_uaa
+        parameters:
+          service-key:
+            name: bayperformance_uaa-key
+      - name: bayperformance_html5_repo_host
+        parameters:
+          service-key:
+            name: bayperformance_html5_repo_host-key
+      - name: bayperformance_destination
+        parameters:
+          content-target: true
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: bayperformance_html5_repo_host
+              ServiceInstanceName: bayperformance_html5_repo_host
+              ServiceKeyName: bayperformance_html5_repo_host-key
+              sap.cloud.service: bayperformance.service
+            - Name: bayperformance_uaa
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: bayperformance_uaa
+              ServiceKeyName: bayperformance_uaa-key
+              sap.cloud.service: bayperformance.service
+  - name: uimodule
+    type: html5
+    path: uimodule
+    build-parameters:
+      builder: custom
+      commands:
+        - npm run build:uimodule --prefix ..
+      supported-platforms: []
+resources:
+  - name: bayperformance_destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: lite
+      service: destination
+      config:
+        HTML5Runtime_enabled: true
+        version: 1.0.0
+  - name: bayperformance_html5_repo_host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+      config:
+        sizeLimit: 2
+  - name: bayperformance_uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
