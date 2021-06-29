@@ -1,13 +1,1 @@
-sap.ui.define([
-	"sap/ui/test/Opa5",
-	"./arrangements/Startup",
-	"./NavigationJourney"
-], function (Opa5, Startup) {
-	"use strict";
-
-	Opa5.extendConfig({
-		arrangements: new Startup(),
-		viewNamespace: "com.mindset.wm.bayperformance.view.",
-		autoWait: true
-	});
-});
+sap.ui.define(["sap/ui/test/Opa5","./arrangements/Startup","./arrangements/FLP","./WorklistJourney","./NavigationJourney","./NotFoundJourney","./ObjectJourney","./FLPIntegrationJourney"],function(e,n,t){"use strict";e.extendConfig({arrangements:new n,assertions:new t,viewNamespace:"com.mindset.EquipmentLog.view.",autoWait:true})});

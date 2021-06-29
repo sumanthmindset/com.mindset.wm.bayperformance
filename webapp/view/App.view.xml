@@ -38,8 +38,54 @@
 					<!--		</ObjectListItem>-->
 					<!--	</items>-->
 					<!--</List>-->
+						<Table id="TableId" items="{path:'/ZFIN_C_BAM_REQUEST'}" >
+					<columns>
+						<Column width="11rem" >
+							<Label text="Article"></Label>
+								<footer>
+									<Text text="Total"></Text>
+								</footer>
+						</Column>
+						<Column width="4rem">
+							<Label text="CWS $"></Label>
+								<footer>
+									<Text text="262.00$"></Text>
+								</footer>
+						</Column>
+						<Column width="4rem">
+							<Label text="LY%"></Label>
+								<footer>
+									<Text text="6.00%"></Text>
+								</footer>
+						</Column>
+						<Column width="4rem">
+							
+							<Label text="LW%"></Label>
+							<footer>
+									<Text text="6.00%"></Text>
+								</footer>
+						</Column>
+					</columns>
 					
+				    <items>
+					<ColumnListItem >
+						<cells>
+							<ObjectIdentifier title="{Article}" text="{ArticleId}"/>
+							<ObjectNumber number="{CWS}" unit="{CWSCurrency}"/>
+						
+							<ObjectNumber number="{LY}" unit="{LYUnit}"/>
+							<ObjectNumber number="{LW}" unit="{LWUnit}"/>
+							
+						</cells>
+						
+					</ColumnListItem>
+					
+					</items>
+				
+				</Table>
+			
 				</content>
+				
 			</Page>
 		</pages>
 	</App>

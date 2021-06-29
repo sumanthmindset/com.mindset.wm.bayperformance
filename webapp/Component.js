@@ -1,10 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/mindset/wm/bayperformance/model/models"
-], function (UIComponent, Device, models) {
+	"com/mindset/wm/bayperformance/model/models",
+	"com/mindset/wm/bayperformance/localService/mockserver"
+], function (UIComponent, Device, models, Mockserver) {
 	"use strict";
-
+		Mockserver.init();
+  var component;
 	return UIComponent.extend("com.mindset.wm.bayperformance.Component", {
 
 		metadata: {
@@ -17,6 +19,23 @@ sap.ui.define([
 		 * @override
 		 */
 		init: function () {
+				component = this;
+				var ODataModel=this.getModel();
+				var oCore = sap.ui.getCore();
+				var mConfig = component.getMetadata().getConfig();
+
+				var oConfig = {
+					disableHeadRequestForToken: true,
+					useBatch: true,
+					defaultOperationMode: "Client"
+				};
+
+				var oModel = component.getModel(mConfig.serviceUrl, oConfig);
+
+				if (oModel.isBindingModeSupported(sap.ui.model.BindingMode.TwoWay)) { // true
+					oModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+				}
+
 			// call the base component's init function
 			UIComponent.prototype.init.apply(this, arguments);
 
